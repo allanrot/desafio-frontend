@@ -1,29 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ListUsers from '../views/ListUsers.vue'
+import ShowUser from '../views/ShowUser.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/users',
     name: 'listUsers',
     component: ListUsers
   },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: function () {
-  //     return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  //   }
-  // }
+  {
+    path: '/user/:id',
+    name: 'showUser',
+    component: ShowUser
+  },
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history',
 })
 
 export default router
