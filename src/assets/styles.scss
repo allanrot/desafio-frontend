@@ -1,0 +1,9 @@
+:root {
+    --primary: #2a83aa;
+    --secondary: #6c757d;
+    --text-color: #000000;
+}
+
+$primary: var(--primary);
+$secondary: var(--secondary);
+$text-color: var(--text-color);
