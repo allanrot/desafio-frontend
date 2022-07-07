@@ -1,9 +1,155 @@
 :root {
-    --primary: #2a83aa;
-    --secondary: #6c757d;
+    --primary: #000000;
+    --secondary: #F7F7F7;
     --text-color: #000000;
+    --secondary-text-color: #888888;
+    --button-color: #ffffff;
 }
 
 $primary: var(--primary);
 $secondary: var(--secondary);
 $text-color: var(--text-color);
+$secondary-text-color: var(--secondary-text-color);
+$button-color: var(--button-color);
+$white: #ffffff;
+
+#app {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: $text-color;
+    height: 120vh;
+}
+
+nav {
+    padding: 30px;
+}
+
+nav a {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+    color: #42b983;
+}
+
+.my-btn-primary {
+    background-color: $primary;
+    color: $text-color;
+    padding: .5rem 2rem .5rem 2rem;
+    border: none;
+    border-radius: 5px;
+    color: $button-color;
+    font-weight: bolder;
+}
+
+.my-btn-secondary {
+    background-color: $secondary;
+    color: $text-color;
+    padding: .5rem 2rem .5rem 2rem;
+    border: none;
+    border-radius: 5px;
+    color: $text-color;
+    font-weight: bolder;
+}
+
+.card-content {
+    background: $secondary;
+    border-radius: 5px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    .card-retangle {
+        position: relative;
+        width: 4px;
+        height: 20px;
+        left: -20px;
+        top: -35px;
+        background: #000000;
+    }
+}
+
+.user-id {
+    color: $secondary-text-color;
+    margin-bottom: .7rem;
+}
+
+.user-name {
+    margin-bottom: .2rem;
+    font-weight: bolder;
+}
+
+.user-email {
+    color: $secondary-text-color;
+}
+
+.user-img {
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.user-desc {
+    margin-left: 1rem;
+}
+
+.user-btn {
+    cursor: pointer;
+    margin: 0 .5rem 0 .5rem;
+}
+
+.user-actions {
+    color: $secondary-text-color;
+}
+
+.user-btn:hover {
+    color: $text-color;
+}
+
+.user-label {
+    color: $secondary-text-color;
+    margin-bottom: .2rem;
+}
+
+.user-info {
+    font-weight: bolder;
+}
+
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: white;
+}
+
+.colored-toast .swal2-close {
+    color: white;
+}
+
+.colored-toast .swal2-html-container {
+    color: white;
+}

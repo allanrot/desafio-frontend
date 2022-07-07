@@ -1,42 +1,90 @@
 <template>
-  <div>
-    
-    <h1 @click="getUsers()">getUsers</h1>
-    <h1 @click="createUser()">createUser</h1>
-    <h1 @click="updateUser()">updateUser</h1>
-    <h1 @click="deleteUser()">deleteUser</h1>
-    <h1 @click="openUserDetails()">openUserDetails</h1>
+  <div class="row w-100 d-flex justify-content-center">
+    <div class="col-12 col-md-8 col-xl-5 d-flex justify-content-between mb-4">
+      <h1 class="fw-bolder">Usuários</h1>
+      <button
+        v-if="!dropdownOptions.open"
+        @click="openCreateUser()"
+        class="my-btn-primary"
+      >
+        Novo usuário
+      </button>
+      <button v-else @click="closeCreateUser()" class="my-btn-secondary">
+        Cancelar
+      </button>
+    </div>
+    <div class="row w-100 d-flex justify-content-center">
+      <div class="col-12 col-md-8 col-xl-5 d-flex flex-column">
+        <transition name="fade">
+          <my-dropdown
+            :open="dropdownOptions.open"
+            @close="closeCreateUser"
+            :updating="dropdownOptions.updating"
+            :userToUpdate="dropdownOptions.userToUpdate"
+          ></my-dropdown>
+        </transition>
+      </div>
+    </div>
+    <div class="row w-100 d-flex justify-content-center">
+      <div class="col-12 col-md-8 col-xl-5 my-2">
+        <div v-for="user in users" :key="user.id">
+          <my-card :user="user" @openUpdateUser="openUpdateUser"></my-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import card from "../components/card.vue";
+import dropdown from "../components/dropdown.vue";
+
 export default {
-  mounted() {
-    this.$store.dispatch("getUsers");
+  components: {
+    myCard: card,
+    myDropdown: dropdown,
+  },
+  data() {
+    return {
+      users: null,
+      dropdownOptions: {
+        open: false,
+        updating: false,
+        userToUpdate: null,
+      },
+    };
+  },
+  async created() {
+    this.getUsers();
   },
   methods: {
-    getUsers() {
-      this.$store.dispatch("getUsers");
+    async getUsers() {
+      await this.$store.dispatch("getUsers");
+      this.users = this.$store.getters["users"];
     },
-    createUser() {
-      this.$store.dispatch("createUser", this.$store.getters['users'][0]);
+    openCreateUser() {
+      this.dropdownOptions.open = true;
     },
-    updateUser() {
-      this.$store.dispatch("updateUser", this.$store.getters['users'][0]);
+    openUpdateUser(user) {
+      this.dropdownOptions.open = true;
+      this.dropdownOptions.updating = true;
+      this.dropdownOptions.userToUpdate = user;
     },
-    deleteUser() {
-      this.$store.dispatch("deleteUser", this.$store.getters['users'][0]);
+    closeCreateUser() {
+      this.dropdownOptions.open = false;
+      this.dropdownOptions.updating = false;
+      this.dropdownOptions.userToUpdate = null;
     },
-    openUserDetails(user) {
-      user = this.$store.getters['users'][0];
-      this.$router.push({
-        name: "showUser",
-        params: { id: user.id },
-      });
-    }
   },
 };
 </script>
 
-<style>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
